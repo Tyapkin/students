@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>
+	{% block title %}Index{% endblock %}
+	</title>
+</head>
+<body>
+{% block user_action %}
+
+{% if user.is_anonymous %}
+
+Hello, anonymous! <a href="{% url "django.contrib.auth.views.login" %}">login</a>
+
+{% else %}
+
+Hello, {{ user }} | <a href="{% url "logout" %}">Log out</a>
+
+{% endif %}
+
+ | <a href="{% url "index" %}">Index page</a>
+
+<hr />
+
+{% endblock %}
+
+{% block content %}{% endblock %}
+</body>
+</html>

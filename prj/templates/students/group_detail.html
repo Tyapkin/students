@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% if group %}
+
+{% block title %}Group | {{ group.group_name }}{% endblock %}
+
+{% endif %}
+
+{% block content %}
+
+<h3>Group: {{ group.group_name }}</h3>
+{% if user.is_anonymous %}
+<table>
+    <tr><th>Student</th><th>Card</th></tr>
+    {% for s in students %}
+    <tr>
+        <td><a href="{% url 'student_detail' s.id %}">{{ s.get_full_name }}</a></td>
+        <td>{{ s.student_card }}</td>
+    </tr>
+    {% empty %}
+        <b>Student not found!</b><br>
+    {% endfor %}
+</table>
+<p><strong>To edit the list of students you need to log in</strong></p>
+{% else %}
+<table>
+    <tr><th>Student</th><th>Card</th></tr>
+    {% for s in students %}
+    <tr>
+        <td><a href="{% url 'student_detail' s.id %}">{{ s.get_full_name }}</a></td>
+        <td>{{ s.student_card }}</td>
+        <td><a href="{% url 'edit_student' s.id %}">Edit</a></td>
+        <td><a href="{% url 'delete_student' s.id %}">Delete</a></td>
+    </tr>
+    {% empty %}
+        <b>Student not found!</b><br>
+    {% endfor %}
+    <tr><td><a href="{% url 'student_add' %}">Add</a></td></tr>
+</table>
+{% endif %}
+
+{% endblock %}

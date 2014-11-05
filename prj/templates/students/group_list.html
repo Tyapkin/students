@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}Groups{% endblock %}
+
+{% block content %}
+{% if group_list %}
+<table>
+	<tr>
+		<th>Group</th><th>Monitor</th><th>Students</th>
+	</tr>
+{% for g in group_list %}
+	<tr>
+		<td>
+			<a href="{% url 'group_detail' pk=g.id %}">
+				{{ g.group_name }}
+			</a>
+		</td>
+		<td>
+			<a href="{{ g.monitor.get_absolute_url }}">
+				{{ g.monitor }}
+			</a>
+		</td>
+		<td>
+		--
+		</td>
+	</tr>
+{% endfor %}
+</table>
+{% else %}
+	<h3>Groups not found.</h3>
+{% endif %}
+{% endblock %}
