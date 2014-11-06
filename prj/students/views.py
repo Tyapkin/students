@@ -6,6 +6,7 @@ from django.views.generic import DetailView, TemplateView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.base import RedirectView
 from django.core.urlresolvers import reverse_lazy
+from django.http import HttpResponse
 from django.forms import DateInput
 
 from .models import StudyGroup, Student
@@ -40,9 +41,11 @@ class Group(TemplateView):
     def get(self, request, **kwargs):
         group = get_object_or_404(self.model, id=self.kwargs['pk'])
         students = get_list_or_404(Student, group=group.id)
+        print request
         return render(request, self.template_name, {
             'group': group,
-            'students': students})
+            'students': students},
+            content_type='text/html')
 
 
 class StudentDetail(DetailView):

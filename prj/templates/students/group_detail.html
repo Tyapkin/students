@@ -1,13 +1,8 @@
 {% extends "base.html" %}
-
 {% if group %}
-
 {% block title %}Group | {{ group.group_name }}{% endblock %}
-
 {% endif %}
-
 {% block content %}
-
 <h3>Group: {{ group.group_name }}</h3>
 {% if user.is_anonymous %}
 <table>
@@ -38,5 +33,4 @@
     <tr><td><a href="{% url 'student_add' %}">Add</a></td></tr>
 </table>
 {% endif %}
-
 {% endblock %}
