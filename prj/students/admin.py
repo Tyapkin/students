@@ -8,6 +8,10 @@ class StudyGroupAdmin(admin.ModelAdmin):
 
 
 class StudentAdmin(admin.ModelAdmin):
+    fields = (
+        ('name', 'surname', 'patronymic'), 'slug',
+        'bdate', 'email', 'student_card', 'group')
+    list_display = ('get_full_name', 'student_card', 'group')
     prepopulated_fields = {'slug': ('name', 'surname')}
 
 admin.site.register(Student, StudentAdmin)

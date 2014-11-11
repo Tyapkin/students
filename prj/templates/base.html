@@ -15,5 +15,8 @@ Hello, {{ user }} | <a href="{% url "logout" %}">Log out</a>
 <hr />
 {% endblock %}
 {% block content %}{% endblock %}
+{% if settings %}
+  <p>Settings OK!</p>
+{% endif %}
 </body>
 </html>
